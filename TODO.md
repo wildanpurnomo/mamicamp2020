@@ -4,6 +4,6 @@ Here's what I came up with :
 * [X] Add components to layout such as button and text.
 * [X] Add onClickEventListener to the button.
 * [] Apply moving button logic into Button's onClickEventListener (includes anim).
-* [] Apply timer logic.
+* [X] Apply timer logic.
 * [X] Apply score counter logic.
-* [] Apply reset logic upon timeout.
+* [X] Apply reset logic upon timeout.
