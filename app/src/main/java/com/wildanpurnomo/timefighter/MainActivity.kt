@@ -20,9 +20,16 @@ class MainActivity : AppCompatActivity() {
         gameScoreTextView = findViewById(R.id.gameScoreTextView)
         timeLeftTextView = findViewById(R.id.timeLeftTextView)
 
+        initView()
+
         tapMeButton.setOnClickListener { view ->
             incrementScore()
         }
+    }
+
+    private fun initView() {
+        val initialScore = getString(R.string.yourScore, score)
+        gameScoreTextView.text = initialScore
     }
 
     private fun incrementScore() {
