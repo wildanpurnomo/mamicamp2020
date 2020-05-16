@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.PersistableBundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         timeLeftTextView = findViewById(R.id.timeLeftTextView)
 
         tapMeButton.setOnClickListener { view ->
+            val bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce)
+            view.startAnimation(bounceAnimation)
             incrementScore()
         }
 
@@ -97,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         val restoredTime = timeLeftOnTimer / 1000
         timeLeftTextView.text = getString(R.string.timeLeft, restoredTime)
 
-        countDownTimer = object: CountDownTimer(timeLeftOnTimer, countDownInterval) {
+        countDownTimer = object : CountDownTimer(timeLeftOnTimer, countDownInterval) {
             override fun onFinish() {
                 endGame()
             }
