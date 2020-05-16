@@ -3,6 +3,7 @@ package com.wildanpurnomo.timefighter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -12,6 +13,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
+        private const val SCORE_KEY = "SCORE_KEY"
+        private const val TIME_LEFT_KEY = "TIME_LEFT_KEY"
     }
 
     internal var score = 0
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var countDownTimer: CountDownTimer
     internal val initialCountDown: Long = 60000
     internal val countDownInterval: Long = 1000
+    internal var timeLeftOnTimer: Long = 60000
 
     internal lateinit var tapMeButton: Button
     internal lateinit var gameScoreTextView: TextView
@@ -43,6 +47,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt(SCORE_KEY, score)
+        outState.putLong(TIME_LEFT_KEY, timeLeftOnTimer)
+        countDownTimer.cancel()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     private fun resetGame() {
         score = 0
 
@@ -57,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTick(millisUntilFinished: Long) {
+                timeLeftOnTimer = millisUntilFinished
                 val timeLeft = millisUntilFinished / 1000
                 timeLeftTextView.text = getString(R.string.timeLeft, timeLeft)
             }
