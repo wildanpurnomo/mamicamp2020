@@ -1,2 +1,2 @@
-# MamiCamp 2020 Android - RWD Version
-Version where I follow entire "Your First Kotlin Android App" course.
+# MamiCamp 2020 Android - My Version
+Version where I follow my ninja way. Here I'm trying to apply MVVM pattern.
