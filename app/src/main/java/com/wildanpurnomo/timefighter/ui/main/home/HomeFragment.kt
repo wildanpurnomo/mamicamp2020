@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.wildanpurnomo.timefighter.R
+import com.wildanpurnomo.timefighter.data.user.UserViewModel
 
 class HomeFragment : Fragment() {
 

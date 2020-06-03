@@ -2,7 +2,9 @@ package com.wildanpurnomo.timefighter.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.service.autofill.TextValueSanitizer
 import android.view.Menu
+import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -35,11 +37,6 @@ class MainActivity : AppCompatActivity() {
 
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -53,11 +50,21 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home,
+                R.id.nav_leaderboard,
                 R.id.nav_sign_out
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        mUserViewModel.setLoggedUserData()
+
+        mUserViewModel.getLoggedUser().observe(this, Observer {
+            navView.getHeaderView(0).findViewById<TextView>(R.id.headerUsername).text =
+                it.username.toString()
+            navView.getHeaderView(0).findViewById<TextView>(R.id.headerMaximumScore).text =
+                String.format("Maximum Score: %d", it.maximumScore ?: 0)
+        })
 
         mUserViewModel.getSuccessfulSignOutSignal().observe(this, Observer {
             startActivity(Intent(this, AuthActivity::class.java))
