@@ -3,6 +3,7 @@ package com.wildanpurnomo.timefighter.manager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 
 object FirestoreManager {
@@ -35,5 +36,15 @@ object FirestoreManager {
     ): Task<Void> {
         return mFirestoreInstance.collection(collectionName).document(documentId)
             .update(query.first, query.second)
+    }
+
+    fun readOrderedCollectionQueryWithLimit(
+        collectionName: String,
+        orderBy: String,
+        limit: Long
+    ): Query {
+        return mFirestoreInstance.collection(collectionName)
+            .orderBy(orderBy, Query.Direction.DESCENDING)
+            .limit(limit)
     }
 }

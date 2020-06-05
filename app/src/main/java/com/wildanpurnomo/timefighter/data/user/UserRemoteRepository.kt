@@ -1,6 +1,7 @@
 package com.wildanpurnomo.timefighter.data.user
 
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.wildanpurnomo.timefighter.manager.FirestoreManager
 import com.wildanpurnomo.timefighter.utils.Constants
@@ -27,6 +28,14 @@ class UserRemoteRepository {
             Constants.FirestoreCollectionNames.COLLECTION_USERS,
             userID,
             Pair("maximumScore", score)
+        )
+    }
+
+    fun getUsersSortByScore(): Query {
+        return FirestoreManager.readOrderedCollectionQueryWithLimit(
+            collectionName = Constants.FirestoreCollectionNames.COLLECTION_USERS,
+            orderBy = "maximumScore",
+            limit = 10L
         )
     }
 }

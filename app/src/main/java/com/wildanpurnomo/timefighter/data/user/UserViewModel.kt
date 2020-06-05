@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.wildanpurnomo.timefighter.data.baseClass.BaseViewModel
 import com.wildanpurnomo.timefighter.manager.FirebaseAuthManager
 import kotlin.math.absoluteValue
@@ -148,5 +149,13 @@ class UserViewModel(application: Application) : BaseViewModel(application) {
             }
             else -> false
         }
+    }
+
+    private val leaderboardQuery: MutableLiveData<Query> by lazy {
+        MutableLiveData<Query>(mUserRemoteRepository.getUsersSortByScore())
+    }
+
+    fun getLeaderboardQuery(): LiveData<Query> {
+        return leaderboardQuery
     }
 }
