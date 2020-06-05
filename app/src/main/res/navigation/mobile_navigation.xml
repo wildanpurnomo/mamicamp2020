@@ -9,11 +9,21 @@
         android:id="@+id/nav_home"
         android:name="com.wildanpurnomo.timefighter.ui.main.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_single_player_page"
+            app:destination="@id/nav_single_player_page" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_single_player_page"
+        android:name="com.wildanpurnomo.timefighter.ui.main.home.singlePlayerMode.SinglePlayerModeFragment"
+        android:label="@string/single_player_mode_page"
+        tools:layout="@layout/fragment_single_player_mode" />
 
     <fragment
         android:id="@+id/nav_leaderboard"
         android:name="com.wildanpurnomo.timefighter.ui.main.leaderboard.LeaderboardFragment"
         android:label="@string/menu_leaderboard"
-        tools:layout="@layout/fragment_leaderboard"/>
+        tools:layout="@layout/fragment_leaderboard" />
 </navigation>
