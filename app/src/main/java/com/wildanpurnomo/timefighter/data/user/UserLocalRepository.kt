@@ -31,8 +31,25 @@ class UserLocalRepository(application: Application) : BaseLocalRepository(applic
         return UserModel(
             userId = userId.toString(),
             username = username.toString(),
-            maximumScore = maxScore ?: -1
+            maximumScore = maxScore
         )
+    }
+
+    fun updateCachedProperty(propertyName: String, value: Any) {
+        when (propertyName) {
+            "userId" -> mSharedPreferencesManager.saveString(
+                Constants.SharedPreferencesKeys.USER_ID_KEY,
+                value as String
+            )
+            "username" -> mSharedPreferencesManager.saveString(
+                Constants.SharedPreferencesKeys.USERNAME_KEY,
+                value as String
+            )
+            "maximumScore" -> mSharedPreferencesManager.saveInt(
+                Constants.SharedPreferencesKeys.MAX_SCORE_KEY,
+                value as Int
+            )
+        }
     }
 
     fun clearCache() {

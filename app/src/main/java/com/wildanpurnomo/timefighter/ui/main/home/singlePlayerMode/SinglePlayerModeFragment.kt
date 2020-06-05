@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.view.doOnLayout
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.wildanpurnomo.timefighter.R
+import com.wildanpurnomo.timefighter.data.user.UserViewModel
 import kotlinx.android.synthetic.main.fragment_single_player_mode.*
 
 class SinglePlayerModeFragment : Fragment() {
@@ -18,6 +20,8 @@ class SinglePlayerModeFragment : Fragment() {
     private lateinit var mSinglePlayerModeViewModel: SinglePlayerModeViewModel
 
     private lateinit var mGameFinishedDialog: GameFinishedDialog
+
+    private val mUserViewModel: UserViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,10 +43,6 @@ class SinglePlayerModeFragment : Fragment() {
         }
 
         fragSingleModeBtn.doOnLayout {
-            Log.d(
-                "passpositionafterchange",
-                "(${it.x}, ${it.y})"
-            )
             mSinglePlayerModeViewModel.setDefaultButtonPos(Pair(it.x, it.y))
         }
 
@@ -72,6 +72,7 @@ class SinglePlayerModeFragment : Fragment() {
                 requireActivity().supportFragmentManager,
                 GameFinishedDialog::class.java.simpleName
             )
+            mUserViewModel.updateLoggedUserMaxScore(finalScore)
         })
     }
 }

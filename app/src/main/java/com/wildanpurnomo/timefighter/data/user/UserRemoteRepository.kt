@@ -2,7 +2,6 @@ package com.wildanpurnomo.timefighter.data.user
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.QuerySnapshot
-import com.wildanpurnomo.timefighter.manager.FirebaseAuthManager
 import com.wildanpurnomo.timefighter.manager.FirestoreManager
 import com.wildanpurnomo.timefighter.utils.Constants
 
@@ -20,6 +19,14 @@ class UserRemoteRepository {
         return FirestoreManager.readWithQuery(
             Constants.FirestoreCollectionNames.COLLECTION_USERS,
             Pair("userId", userID)
+        )
+    }
+
+    fun updateUserScoreByID(userID: String, score: Int): Task<Void> {
+        return FirestoreManager.updateDocumentById(
+            Constants.FirestoreCollectionNames.COLLECTION_USERS,
+            userID,
+            Pair("maximumScore", score)
         )
     }
 }

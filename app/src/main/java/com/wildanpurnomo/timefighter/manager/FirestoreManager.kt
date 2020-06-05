@@ -27,4 +27,13 @@ object FirestoreManager {
         return mFirestoreInstance.collection(collectionName).whereEqualTo(query.first, query.second)
             .get()
     }
+
+    fun updateDocumentById(
+        collectionName: String,
+        documentId: String,
+        query: Pair<String, Any>
+    ): Task<Void> {
+        return mFirestoreInstance.collection(collectionName).document(documentId)
+            .update(query.first, query.second)
+    }
 }

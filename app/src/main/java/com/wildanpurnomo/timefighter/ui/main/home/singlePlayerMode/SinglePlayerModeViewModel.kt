@@ -65,7 +65,7 @@ class SinglePlayerModeViewModel(application: Application) : AndroidViewModel(app
 
     fun startCountDownTimer() {
         if (countDownTimer.value == null) {
-            val timerInstance = object : CountDownTimer(10000, 1000) {
+            val timerInstance = object : CountDownTimer(60000, 1000) {
                 override fun onFinish() {
                     resetGame()
                 }

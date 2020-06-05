@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.wildanpurnomo.timefighter.data.baseClass.BaseViewModel
 import com.wildanpurnomo.timefighter.manager.FirebaseAuthManager
+import kotlin.math.absoluteValue
 
 class UserViewModel(application: Application) : BaseViewModel(application) {
 
@@ -124,5 +125,28 @@ class UserViewModel(application: Application) : BaseViewModel(application) {
 
     fun getLoggedUser(): LiveData<UserModel> {
         return loggedUser
+    }
+
+    fun updateLoggedUserMaxScore(newScore: Int) {
+        val userData = mUserLocalRepository.getCachedUserData()
+        if (isMaxScore(userData.maximumScore, newScore)) {
+            mUserRemoteRepository.updateUserScoreByID(userData.userId.toString(), newScore)
+                .addOnSuccessListener {
+                    mUserLocalRepository.updateCachedProperty("maximumScore", newScore)
+                    setLoggedUserData()
+                }
+        }
+    }
+
+    private fun isMaxScore(currently: Int?, new: Int): Boolean {
+        return when {
+            currently == null -> {
+                true
+            }
+            new > currently -> {
+                true
+            }
+            else -> false
+        }
     }
 }
