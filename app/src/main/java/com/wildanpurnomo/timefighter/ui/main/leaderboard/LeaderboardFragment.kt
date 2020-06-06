@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -25,6 +27,8 @@ class LeaderboardFragment : Fragment() {
 
     private lateinit var mLeaderboardViewModel: LeaderboardViewModel
 
+    private lateinit var mLayoutAnimationController: LayoutAnimationController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mRecyclerViewAdapter = LeaderboardRVAdapter()
@@ -43,8 +47,12 @@ class LeaderboardFragment : Fragment() {
 
         mLeaderboardViewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java)
 
+        mLayoutAnimationController =
+            AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_animation_fall_down)
+
         fragLeaderboardRV.adapter = mRecyclerViewAdapter
         fragLeaderboardRV.layoutManager = LinearLayoutManager(requireContext())
+        fragLeaderboardRV.layoutAnimation = mLayoutAnimationController
 
         mUserViewModel.getLeaderboardQuery().observe(viewLifecycleOwner, Observer {
             mLeaderboardViewModel.setQueryListener(it)
@@ -52,6 +60,7 @@ class LeaderboardFragment : Fragment() {
 
         mLeaderboardViewModel.getLeaderboardList().observe(viewLifecycleOwner, Observer {
             mRecyclerViewAdapter.updateDataset(it)
+            fragLeaderboardRV.scheduleLayoutAnimation()
         })
 
         mLeaderboardViewModel.getToastMsg().observe(viewLifecycleOwner, Observer {
