@@ -1,5 +1,7 @@
 package com.wildanpurnomo.timefighter.ui.main.home.singlePlayerMode
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -51,8 +53,12 @@ class SinglePlayerModeFragment : Fragment() {
         }
 
         mSinglePlayerModeViewModel.getButtonPosition().observe(viewLifecycleOwner, Observer {
-            fragSingleModeBtn.x = it.first
-            fragSingleModeBtn.y = it.second
+            val animX = ObjectAnimator.ofFloat(fragSingleModeBtn, "x", it.first)
+            val animY = ObjectAnimator.ofFloat(fragSingleModeBtn, "y", it.second)
+            AnimatorSet().setDuration(100).apply {
+                playTogether(animX, animY)
+                start()
+            }
         })
 
         mSinglePlayerModeViewModel.getCurrentScore().observe(viewLifecycleOwner, Observer {
