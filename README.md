@@ -24,7 +24,7 @@ Mode where user attempts to get as many game points as possible. The gameplay is
 App records user's maximum point from Single Player Mode and rank it in the leaderboard along with other users. Leaderboard displays top 10 points. Cloud Firestore is used.
 
 * Multiplayer Mode  
-I have an idea to simulate multiplayer version of this game using WebSocket backend service. This is not done yet. I've developed the backend service (code stored in branch "multiplayer-service"). The problem is I still not be able to connect with local server using OKHTTP's WebSocket, however I can connect to the remote server. I'll continue working on this.
+I have an idea to simulate multiplayer version of this game using WebSocket backend service. This is not done yet. I've developed the backend service. The problem is I still not be able to connect with local server using OKHTTP's WebSocket, however I can connect to the remote server. I'll continue working on this.
 
 I'm using MVVM + Repository pattern.
 
