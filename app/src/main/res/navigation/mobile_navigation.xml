@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_single_player_page"
             app:destination="@id/nav_single_player_page" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_practice_page"
+            app:destination="@id/nav_practice_page" />
     </fragment>
 
     <fragment
@@ -20,6 +23,12 @@
         android:name="com.wildanpurnomo.timefighter.ui.main.home.singlePlayerMode.SinglePlayerModeFragment"
         android:label="@string/single_player_mode_page"
         tools:layout="@layout/fragment_single_player_mode" />
+
+    <fragment
+        android:id="@+id/nav_practice_page"
+        android:name="com.wildanpurnomo.timefighter.ui.main.home.practiceMode.PracticeModeFragment"
+        android:label="@string/practice_mode_page"
+        tools:layout="@layout/fragment_practice_mode"/>
 
     <fragment
         android:id="@+id/nav_leaderboard"

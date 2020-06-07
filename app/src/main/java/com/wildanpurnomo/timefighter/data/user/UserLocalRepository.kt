@@ -49,7 +49,16 @@ class UserLocalRepository(application: Application) : BaseLocalRepository(applic
                 Constants.SharedPreferencesKeys.MAX_SCORE_KEY,
                 value as Int
             )
+            "isFirstTime" -> mSharedPreferencesManager.saveBoolean(
+                Constants.SharedPreferencesKeys.IS_FIRST_TIME,
+                value as Boolean
+            )
         }
+    }
+
+    fun getIsFirstTime(): Boolean {
+        return mSharedPreferencesManager.getValueBoolean(Constants.SharedPreferencesKeys.IS_FIRST_TIME)
+            ?: true
     }
 
     fun clearCache() {

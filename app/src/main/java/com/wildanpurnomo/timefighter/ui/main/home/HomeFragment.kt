@@ -23,13 +23,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fragHomeCardSingle.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_home_to_nav_single_player_page)
-        }
-
         val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.item_animation_fall_down)
         fragHomeCardPractice.startAnimation(anim)
         fragHomeCardSingle.startAnimation(anim)
         fragHomeCardMulti.startAnimation(anim)
+
+        fragHomeCardSingle.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_home_to_nav_single_player_page)
+        }
+
+        fragHomeCardPractice.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_home_to_nav_practice_page)
+        }
     }
 }

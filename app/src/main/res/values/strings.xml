@@ -42,4 +42,8 @@
     <string name="your_score">Your Score: %1$d</string>
     <string name="end_game_dialog_message">Time\'s up! Your final score: %1$d</string>
     <string name="dialog_ok">Ok</string>
+    <string name="tutorial_button">"All you need to do is tapping this button to get scores. This button will move randomly as you hit it. "</string>
+    <string name="tutorial_time">You only have 1 minute to gather as many points as possible.</string>
+    <string name="tutorial_score">Get the highest score possible and reach highest rank in leaderboard. Try now! Good luck and have fun!</string>
+    <string name="practice_mode_page">Practice Mode</string>
 </resources>

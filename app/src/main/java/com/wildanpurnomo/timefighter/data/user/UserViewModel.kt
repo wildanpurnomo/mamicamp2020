@@ -158,4 +158,8 @@ class UserViewModel(application: Application) : BaseViewModel(application) {
     fun getLeaderboardQuery(): LiveData<Query> {
         return leaderboardQuery
     }
+
+    fun isFIrstTime(): Boolean {
+        return mUserLocalRepository.getIsFirstTime()
+    }
 }
